@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vision artificielle — prétraitement</title>
+<meta name="description" content="16 pages pour comprendre luminance, contraste, étirement linéaire et égalisation d'histogramme — avec démonstration Python.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Vision artificielle — prétraitement">
+<meta property="og:description" content="Luminance, contraste, transformations et histogrammes : du pixel brut à l'image exploitable. 16 pages + démo Python.">
+<meta property="og:image" content="https://mouhammed2.github.io/cover.png">
+<meta property="og:url" content="https://mouhammed2.github.io/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Vision artificielle — prétraitement">
+<meta name="twitter:description" content="Du pixel brut à l'image exploitable — 16 pages et une démo Python.">
+<meta name="twitter:image" content="https://mouhammed2.github.io/cover.png">
+<style>
+  :root{
+    --bg:#f7f6f3; --ink:#14131a; --muted:#6b6a72; --line:#e2e0da;
+    --accent:#4444d6; --card:#fffdf9;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{
+    background:var(--bg); color:var(--ink);
+    font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1180px;margin:0 auto;padding:56px 32px 72px}
+  .eyebrow{
+    font:600 12px/1 ui-monospace,SFMono-Regular,Menlo,monospace;
+    letter-spacing:.22em;text-transform:uppercase;color:var(--accent);
+    display:flex;align-items:center;gap:10px;margin-bottom:26px
+  }
+  .eyebrow::before{content:"";width:9px;height:9px;background:var(--accent);display:block}
+  .hero{display:grid;grid-template-columns:1fr 1.05fr;gap:64px;align-items:center}
+  h1{font-size:clamp(40px,5.2vw,76px);line-height:.98;letter-spacing:-.035em;margin:0 0 22px;font-weight:640}
+  .lead{font-size:clamp(17px,1.9vw,22px);line-height:1.5;color:#3a3942;max-width:32ch;margin:0 0 32px}
+  .actions{display:grid;gap:10px;max-width:400px}
+  .actions .btn-primary{justify-content:center}
+  .actions-sub{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .actions-sub .btn{justify-content:center;padding:12px 14px;font-size:14px}
+  .btn{
+    display:inline-flex;align-items:center;gap:10px;padding:14px 22px;border-radius:2px;
+    font-size:15px;font-weight:560;text-decoration:none;border:1px solid transparent;transition:.15s
+  }
+  .btn-primary{background:var(--ink);color:#fff}
+  .btn-primary:hover{background:var(--accent)}
+  .btn-ghost{border-color:var(--line);background:var(--card);color:var(--ink)}
+  .btn-ghost:hover{border-color:var(--ink)}
+  .cover{
+    display:block;width:100%;height:auto;border:1px solid var(--line);
+    box-shadow:0 24px 60px -32px rgba(20,19,26,.35);background:#fff
+  }
+  .hero-art{display:block;text-decoration:none}
+  @media(max-width:900px){
+    .hero{grid-template-columns:1fr;gap:34px}
+    .hero-art{order:-1}
+  }
+  .facts{
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+    gap:26px;margin:44px 0 0;padding-top:28px;border-top:1px solid var(--line)
+  }
+  .fact b{display:block;font-size:30px;letter-spacing:-.02em;margin-bottom:6px}
+  .fact span{
+    font:500 11px/1.4 ui-monospace,SFMono-Regular,Menlo,monospace;
+    letter-spacing:.16em;text-transform:uppercase;color:var(--muted)
+  }
+  footer{
+    margin-top:56px;padding-top:22px;border-top:1px solid var(--line);
+    display:flex;flex-wrap:wrap;gap:10px 24px;justify-content:space-between;
+    font:500 12px/1.6 ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--muted);
+    letter-spacing:.06em
+  }
+  a{color:inherit}
+  @media(max-width:640px){.wrap{padding:36px 20px 48px}}
+</style>
+</head>
+<body>
+<main class="wrap">
+  <div class="hero">
+    <div class="hero-text">
+      <p class="eyebrow">Traitement d'image · cours</p>
+      <h1>Vision artificielle</h1>
+      <p class="lead">Luminance, contraste, transformations et histogrammes — du pixel brut à l'image exploitable.</p>
+
+      <div class="actions">
+        <a class="btn btn-primary" href="/s/vision-artificielle/">Ouvrir la présentation <span aria-hidden="true">→</span></a>
+        <div class="actions-sub">
+          <a class="btn btn-ghost" href="/telechargements/vision-artificielle-carrousel.pdf">PDF · 16 pages</a>
+          <a class="btn btn-ghost" href="/telechargements/vision-artificielle-video.mp4">Vidéo · 1 min 25</a>
+        </div>
+      </div>
+    </div>
+
+    <a class="hero-art" href="/s/vision-artificielle/" aria-label="Ouvrir la présentation">
+      <img class="cover" src="/cover.png" alt="Page de titre : Vision artificielle — luminance 93,5, écart-type 16,5, dynamique 67–136" width="1600" height="900">
+    </a>
+  </div>
+
+  <section class="facts">
+    <div class="fact"><b>16</b><span>pages</span></div>
+    <div class="fact"><b>3</b><span>traitements comparés</span></div>
+    <div class="fact"><b>1</b><span>démo Python</span></div>
+    <div class="fact"><b>93,5 → 134,2</b><span>luminance mesurée</span></div>
+  </section>
+
+  <footer>
+    <span>Image de test 640 × 480 · mesures réelles</span>
+    <span>open-slide · 16 pages</span>
+  </footer>
+</main>
+</body>
+</html>
